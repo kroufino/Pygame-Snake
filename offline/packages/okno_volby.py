@@ -118,11 +118,13 @@ def choice(šířka_okna,výška_okna,velikost_blocku,okno,bg,font,font_mensi,fp
                 hodnoty = ["0", "0", "0"]
             #Vypsání hodnot skóre na obrazovku  
             for i in range(3):
+                pocet = int(len(list(str(hodnoty[i]))))#Kontrola délky relativního prvku, aby se zamezilo nechtěným problémům
                 hodnota = f"{obtiznosti[i]} : {hodnoty[i]}"
                 hodnota = font_mensi.render(hodnota, True, (255, 255, 255))
                 okno.blit(hodnota, (50, (výška_okna // 8) * (2 + i)))
-                box = Rect(25, (výška_okna // 8) * (2 + i) - 11, 160, 45)
+                box = Rect(25, (výška_okna // 8) * (2 + i) - 11, 150 + pocet * 11, 45)
                 pygame.draw.rect(okno, (255, 0, 0), box, 2, 3)
+
 
         
         if cas > 1 / fps:#logika fps
