@@ -122,4 +122,7 @@ Pokud se chcete zbavit vyskakovacího cmd.exe okna, stačí spouštět program p
 > ⚠️ **Pozor:**
 > Pokud přejmenujete .py soubor, je třeba upravit obsah souboru .vbs pro opětovné fungování
 
+> ⚠️ **Pozor:**
+> .vbs a snake-game.py se musí nacházet ve stejném adresáři!
+
 
