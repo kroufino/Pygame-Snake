@@ -12,6 +12,17 @@
 `Kompatibilní s Unix a Windows based systémy`
 
 ---
+
+## Stažení
+
+[![Online verze](https://img.shields.io/badge/Online%20verze-green?style=for-the-badge)](https://downgit.github.io/#/home?url=https://github.com/kroufino/Pygame-Snake/tree/master/online)
+&nbsp;
+[![Offline verze](https://img.shields.io/badge/Offline%20verze-blue?style=for-the-badge)](https://downgit.github.io/#/home?url=https://github.com/kroufino/Pygame-Snake/tree/master/offline)
+
+> ⚠️ **Pozor:**
+> Stažené .zip soubory obsahují pouze .py soubory, nikoli `requirements.txt` nebo `donotshowup.vbs`
+
+---
 ## ▶️ Jak spustit
 
 1. Bude potřeba Python 3.8+.
