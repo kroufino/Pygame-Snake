@@ -48,29 +48,6 @@ python snake-game.py
 ```
 
 ---
-## Changelog
-
-`!` `08.03.25` `Hra obsahuje prvky nutné k samotnému fungovaní hry, zjednodušeně, toto je kostra programu. Veškteré funkce, které budou v budoucnosti přidávány, jsou považovány za dodatkové`
-
-`!` `13.03.25` `Ve hře jsou nyní obtížnosti, které jsou volitelné + byla upravena logika fps`
-
-`!` `14.03.25` `Oprava chyby v určování pozice jídla zavisejíc na obtížnosti uživatelem zvolené`
-
-`!` `19.03.25` `Nyní je možnost zastavit zobrazování se okna programu cmd.exe po každém zapnutí programu užitím donotshowup.vbs souboru fungujicího na Windows systémech. Více níže...`
-
-`!` `20.03.25` `Nyní je ve hře ukládání nejlepšího skóre pro každou obtížnost. Také je nově ve hře možnost nápovědy + drobné úpravy`
-
-`!` `21.03.25` `Drobné úpravy`
-
-`!` `26.03.25` `Rozdělení do vícero souborů za účelem snažší čitelnosti + zlepšení komentářů`
-
-`!` `30.03.25` `Drobné úpravy`
-
-`!` `6.04.25` `Přidání varianty pro ukládání dat do databáze`
-
-`!` `9.04.25` `Přidání varianty zobrazení nejlepšího hráče u online varianty hry`
-
----
 
 <div style="display: flex; gap: 10px;">
     <img src="https://github.com/kroufino/PyGame-Snake/blob/master/img/1.png" width="30%" height="40%">
