@@ -105,7 +105,7 @@ def choice(šířka_okna,výška_okna,velikost_blocku,okno,bg,font,font_mensi,fp
             okno.blit(umístění, ((šířka_okna * 0.365), 3))
             #Request se databázi odešle jen jednou, a to ihned po aktivování možnosti zobrazení žebříčků
             if proběhlo == False:
-                pozice = funkce.žebříček(sloupce, host, username, password, database)
+                pozice = funkce.žebříček(sloupce, mycursor)
                 proběhlo = True
             #vykreslení možnosti exitu
             info = "Exit"
