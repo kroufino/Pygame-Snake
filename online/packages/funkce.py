@@ -125,15 +125,8 @@ def vytvoření_jídla(obtiznost,obtiznosti,velikost_blocku,šířka_okna,výšk
                     jidlo[0] = šířka_okna - velikost_blocku
                 jidlo[1] = velikost_blocku * random.randint(0, round(výška_okna / velikost_blocku) - 1) #Generování náhodného čísla reprezentující pozici y, pro block jídla
     return jidlo
-def žebříček(sloupce, host, username, password, database):#získání aktuálně nejlepších uživatelů v databázi
-    mydb = mysql.connector.connect(
-    host = host
-    ,user = username
-    ,password = password
-    ,database = database
-)
+def žebříček(sloupce,  mycursor):#získání aktuálně nejlepších uživatelů v databázi
     pozice = []
-    mycursor = mydb.cursor()
     for sloupec in sloupce:
         mycursor.execute(f"SELECT username FROM `Score` ORDER BY {sloupec} DESC")
         result = mycursor.fetchall()
