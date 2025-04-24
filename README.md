@@ -3,7 +3,7 @@
 * Jedná se o snake hru naprogramovanou pomocí knihovny Pygame v jazyce Python, za účelem školního projektu.
 * Hra je rozdělena do vícero souborů pro snažší čitelnost
 * Hra obsahuje možnost zvolení obtížnosti(více k obtížnostem níže), obsahuje možnost nápovědy, zobrazení a vynulování hodnot skóre dosažených uživatelem 
-* Hra je ve dvou variantách. [První](https://github.com/kroufino/Pygame-Snake/tree/master/offline) nabízí ukládání skóre do souboru na aktuálně používaném počítači, [druhá](https://github.com/kroufino/Pygame-Snake/tree/master/online) nabízí ukládání skóre do databáze
+* Hra je ve dvou variantách. [První](https://github.com/kroufino/Pygame-Snake/tree/prod/offline) nabízí ukládání skóre do souboru na aktuálně používaném počítači, [druhá](https://github.com/kroufino/Pygame-Snake/tree/prod/online) nabízí ukládání skóre do databáze
 * Online varianta, která ukládá výsledky skóre do Vámi zvolené databáze nabízí možnost zobrazit nejlepšího hráče pro jednotlivou obtížnost!
 
 > ⚠️ **Pozor:**
@@ -15,9 +15,9 @@
 
 ## Stažení
 
-[![Online verze](https://img.shields.io/badge/Online%20verze-green?style=for-the-badge)](https://downgit.github.io/#/home?url=https://github.com/kroufino/Pygame-Snake/tree/master/online)
+[![Online verze](https://img.shields.io/badge/Online%20verze-green?style=for-the-badge)](https://downgit.github.io/#/home?url=https://github.com/kroufino/Pygame-Snake/tree/prod/online)
 &nbsp;
-[![Offline verze](https://img.shields.io/badge/Offline%20verze-blue?style=for-the-badge)](https://downgit.github.io/#/home?url=https://github.com/kroufino/Pygame-Snake/tree/master/offline)
+[![Offline verze](https://img.shields.io/badge/Offline%20verze-blue?style=for-the-badge)](https://downgit.github.io/#/home?url=https://github.com/kroufino/Pygame-Snake/tree/prod/offline)
 
 > ⚠️ **Pozor:**
 > Stažené .zip soubory obsahují pouze .py soubory, nikoli `requirements.txt` nebo `donotshowup.vbs`
@@ -50,12 +50,12 @@ python snake-game.py
 ---
 
 <div style="display: flex; gap: 10px;">
-    <img src="https://github.com/kroufino/PyGame-Snake/blob/master/img/1.png" width="30%" height="40%">
-    <img src="https://github.com/kroufino/PyGame-Snake/blob/master/img/2.png" width="30%" height="40%">
+    <img src="https://github.com/kroufino/PyGame-Snake/blob/prod/img/1.png" width="30%" height="40%">
+    <img src="https://github.com/kroufino/PyGame-Snake/blob/prod/img/2.png" width="30%" height="40%">
 </div>
 <div style="display: flex; gap: 10px;">
-    <img src="https://github.com/kroufino/PyGame-Snake/blob/master/img/3.png" width="30%" height="40%">
-    <img src="https://github.com/kroufino/PyGame-Snake/blob/master/img/4.png" width="30%" height="40%">
+    <img src="https://github.com/kroufino/PyGame-Snake/blob/prod/img/3.png" width="30%" height="40%">
+    <img src="https://github.com/kroufino/PyGame-Snake/blob/prod/img/4.png" width="30%" height="40%">
 </div>
 
 ---
@@ -63,8 +63,8 @@ python snake-game.py
 ## Žebříčky (Dostupné pouze u online varianty)
 
 <div style="display: flex; gap: 10px;">
-    <img src="https://github.com/kroufino/PyGame-Snake/blob/master/img/6.png" width="30%" height="40%">
-    <img src="https://github.com/kroufino/PyGame-Snake/blob/master/img/5.png" width="30%" height="40%">
+    <img src="https://github.com/kroufino/PyGame-Snake/blob/prod/img/6.png" width="30%" height="40%">
+    <img src="https://github.com/kroufino/PyGame-Snake/blob/prod/img/5.png" width="30%" height="40%">
 </div>
 
 
