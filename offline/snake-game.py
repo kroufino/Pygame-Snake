@@ -2,7 +2,6 @@ import pygame
 from pygame.locals import *
 from packages import okno_volby
 from packages import funkce
-import random
 import time
 import platform
 import os
@@ -82,10 +81,10 @@ while run:
     #tvorba jídla
     if nove_jidlo == True:
         nove_jidlo = False
-        jidlo = funkce.vytvoření_jídla(obtiznost,obtiznosti,velikost_blocku,šířka_okna,výška_okna,jidlo)
-    pygame.draw.rect(okno, barva_jidla, (jidlo[0], jidlo[1], velikost_blocku, velikost_blocku))
+        jidlo = funkce.vytvoření_jídla(obtiznost,obtiznosti,velikost_blocku,šířka_okna,výška_okna,jidlo,okno)
+    jidlo.vykresli()
     #Kolize s jídlem
-    if pozice_hada[0] == jidlo:#[0] je block hlavy hada a jeho pozice, neboli (1, 20) třeba. Pokud se rovná s pozicí jídla, tak se podmínka vykoná
+    if jidlo.kolize(pozice_hada):
         nove_jidlo = True
         #Prodloužení hada
         prodlouzeny_block = list(pozice_hada[-1])

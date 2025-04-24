@@ -1,9 +1,8 @@
 import pygame
 from pygame.locals import *
 import random
-import time
-import os
-import mysql.connector
+from packages import block
+
 def vykreslení_okna(okno,bg):#Výplň okna
     okno.fill(bg) 
 def vykreslení_obtížnosti(obtiznost,font,okno,šířka_okna,výška_okna,obtiznosti):#Vykreslení zvolené obtížnosti
@@ -85,7 +84,8 @@ def popisky(easy,medium,hard,okno,obtiznosti,font_mensi):#Popisky k blockům obt
         block = moznosti[i]
         info = font_mensi.render(info, True, (255, 255, 255))
         okno.blit(info, (block[0] + 30, block[1]))
-def vytvoření_jídla(obtiznost,obtiznosti,velikost_blocku,šířka_okna,výška_okna,jidlo):#Tvorba blocku, který bude reprezentovat jídlo
+def vytvoření_jídla(obtiznost,obtiznosti,velikost_blocku,šířka_okna,výška_okna,jidlo,okno):#Tvorba blocku, který bude reprezentovat jídlo
+    jidlo = [0,0]
     if obtiznost == obtiznosti[0]: #easy obtížnost(blocky nebudou nikdy na okraji obrazovky)
         jidlo[0] = velikost_blocku * random.randint(2, round(šířka_okna / velikost_blocku) - 2) #Generování náhodného čísla reprezentující pozici x, pro block jídla, který nebude na okraji obrazovky
         jidlo[1] = velikost_blocku * random.randint(2, round(výška_okna / velikost_blocku) - 2) #Generování náhodného čísla reprezentující pozici y, pro block jídla, který nebude na okraji obrazovky
@@ -124,6 +124,7 @@ def vytvoření_jídla(obtiznost,obtiznosti,velikost_blocku,šířka_okna,výšk
                 else:
                     jidlo[0] = šířka_okna - velikost_blocku
                 jidlo[1] = velikost_blocku * random.randint(0, round(výška_okna / velikost_blocku) - 1) #Generování náhodného čísla reprezentující pozici y, pro block jídla
+    jidlo = block.Block(jidlo[0],jidlo[1],(200, 50, 50),okno,velikost_blocku)
     return jidlo
 def žebříček(sloupce,  mycursor):#získání aktuálně nejlepších uživatelů v databázi
     pozice = []

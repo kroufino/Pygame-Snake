@@ -1,16 +1,21 @@
 import pygame
 from pygame.locals import *
-from packages import funkce
-import random
+from packages import funkce,block
 import time
 
 def choice(šířka_okna,výška_okna,velikost_blocku,okno,bg,font,font_mensi,fps,outline,modra,body_inner,soubor_skóre,obtiznosti):
-    easy = [šířka_okna // 5, výška_okna // 3] #Souřadnice blocku reprezentující Easy obtížnost
-    medium = [šířka_okna // 2, výška_okna // 3] #Souřadnice blocku reprezentující Mid obtížnost
-    hard = [šířka_okna // 1.25, výška_okna // 3] #Souřadnice blocku reprezentující Hard obtížnost
-    skore = [4 * velikost_blocku, (výška_okna // 3) * 2 + velikost_blocku * 3] #Souřadnice blocku reprezentující vypsání dosažených hodnot skóre
-    reset = [šířka_okna // 1.5, (výška_okna // 3) - velikost_blocku * 3] #Souřadnice blocku reprezentující Možnost resetu hodnot skóre
-    popis = [šířka_okna - velikost_blocku * 4, (výška_okna // 3) * 2 + velikost_blocku * 3] #Souřadnice blocku reprezentující Popisky blocků
+    easy_cords = [šířka_okna // 5, výška_okna // 3] #Souřadnice blocku reprezentující Easy obtížnost
+    medium_cords = [šířka_okna // 2, výška_okna // 3] #Souřadnice blocku reprezentující Mid obtížnost
+    hard_cords = [šířka_okna // 1.25, výška_okna // 3] #Souřadnice blocku reprezentující Hard obtížnost
+    skore_cords = [4 * velikost_blocku, (výška_okna // 3) * 2 + velikost_blocku * 3] #Souřadnice blocku reprezentující vypsání dosažených hodnot skóre
+    reset_cords = [šířka_okna // 1.5, (výška_okna // 3) - velikost_blocku * 3] #Souřadnice blocku reprezentující Možnost resetu hodnot skóre
+    popis_cords = [šířka_okna - velikost_blocku * 4, (výška_okna // 3) * 2 + velikost_blocku * 3] #Souřadnice blocku reprezentující Popisky blocků
+    easy = block.Block(easy_cords[0],easy_cords[1],(0,255,0),okno,velikost_blocku)
+    medium = block.Block(medium_cords[0],medium_cords[1],(255,255,0),okno,velikost_blocku)
+    hard = block.Block(hard_cords[0], hard_cords[1],(255,0,0),okno,velikost_blocku)
+    skore = block.Block(skore_cords[0], skore_cords[1],(0, 255, 255),okno,velikost_blocku)
+    reset = block.Block(reset_cords[0], reset_cords[1],(255, 0, 0),okno,velikost_blocku)
+    popis = block.Block(popis_cords[0], popis_cords[1],(5, 110, 80),okno,velikost_blocku)
     #Proměnné
     neměnit_směr = False
     timeout = 0
@@ -48,36 +53,37 @@ def choice(šířka_okna,výška_okna,velikost_blocku,okno,bg,font,font_mensi,fp
                 stisk += 1
         if zobraz_skore == False:
             funkce.vykresleni_volby(okno,font,šířka_okna)
-            if pomoc == True:#Pokud hráč aktivuje nápovědu, tato funkce zobrazí popisky jednotlivých blocků
-                funkce.popisky(easy,medium,hard,okno,obtiznosti,font_mensi)
+            if pomoc == True:#Pokud hráč aktivuje nápovědu, tato funkce zobrazí popis_cordsky jednotlivých blocků
+                funkce.popisky(easy_cords,medium_cords,hard_cords,okno,obtiznosti,font_mensi)
             #Vykreslení blocků pro možnost volby
-            pygame.draw.rect(okno, (0, 255, 0), (easy[0], easy[1], velikost_blocku, velikost_blocku))
-            pygame.draw.rect(okno, (255, 255, 0), (medium[0], medium[1], velikost_blocku, velikost_blocku))
-            pygame.draw.rect(okno, (255, 0, 0), (hard[0], hard[1], velikost_blocku, velikost_blocku))
-            pygame.draw.rect(okno, (0, 255, 255), (skore[0], skore[1], velikost_blocku, velikost_blocku))#Block pro volbu zobrazení nejvyššího dosaženého skóre
-            pygame.draw.rect(okno, (5, 110, 80), (popis[0], popis[1], velikost_blocku, velikost_blocku))
-            #Vykreslení defaultních popisků blocků
+            easy.vykresli()
+            medium.vykresli()
+            hard.vykresli()
+            skore.vykresli()
+            popis.vykresli()
+            #Vykreslení defaultních popis_cordsků blocků
             info = "Nápověda"
             info = font_mensi.render(info, True, (255, 255, 255))
-            okno.blit(info, (popis[0] - 40, popis[1] + 30))
+            okno.blit(info, (popis_cords[0] - 40, popis_cords[1] + 30))
             info = "Nejvyšší skóre"
             info = font_mensi.render(info, True, (255, 255, 255))
-            okno.blit(info, (skore[0] - 64, skore[1] + 30))
+            okno.blit(info, (skore_cords[0] - 64, skore_cords[1] + 30))
             #Kontrola kolize hada s blockem reprezentujícím obtížnost
-            if pozice_hada[0] == easy:#[0] je block hlavy hada a jeho pozice, neboli (1, 20) třeba. Pokud se rovná s pozicí jídla, tak se podmínka vykoná
+            if easy.kolize(pozice_hada):
                 obtiznost = obtiznosti[0]
                 break
-            elif pozice_hada[0] == medium:#[0] je block hlavy hada a jeho pozice, neboli (1, 20) třeba. Pokud se rovná s pozicí jídla, tak se podmínka vykoná
+            if medium.kolize(pozice_hada):
                 obtiznost = obtiznosti[1]
                 break
-            elif pozice_hada[0] == hard:#[0] je block hlavy hada a jeho pozice, neboli (1, 20) třeba. Pokud se rovná s pozicí jídla, tak se podmínka vykoná
+            if hard.kolize(pozice_hada):
                 obtiznost = obtiznosti[2]
                 break
-            elif pozice_hada[0] == skore:
+            if skore.kolize(pozice_hada):
                 if round(time.time() - timeout, 2) > 0.3:#Pokud hráč aktivuje možnost vykreslení skóre, na 0,3s se block stane nefunkčním, aby se zabránilo nechtěnému aktivování(jednodušeji řečeno, jedná se o odezvu)
                     zobraz_skore = True
+                    proběhlo = False
                     timeout = time.time()
-            elif pozice_hada[0] == popis:
+            if popis.kolize(pozice_hada):
                 if round(time.time() - cekej, 2) > 0.3:#Pokud hráč aktivuje možnost nápovědy, na 0,3s se block stane nefunkčním, aby se zabránilo nechtěnému aktivování(jednodušeji řečeno, jedná se o odezvu)
                     cekej = time.time()
                     if pomoc == False:
@@ -87,21 +93,20 @@ def choice(šířka_okna,výška_okna,velikost_blocku,okno,bg,font,font_mensi,fp
                 else:
                     cekej = time.time()
         else:#Menu >>skóre<<
-            #Vykreslení možnosti resetování hodnot skóre
-            info = "Reset hodnot"
+            #Vykreslení možnosti reset_cordsování hodnot skóre
+            info = "reset_cords hodnot"
             info = font_mensi.render(info, True, (255, 255, 255))
-            okno.blit(info, (reset[0] + 30, reset[1]))
-            pygame.draw.rect(okno, (255, 0, 0), (reset[0], reset[1], velikost_blocku, velikost_blocku))
+            reset.vykresli()
             #vykreslení možnosti exitu
             info = "Exit"
             info = font_mensi.render(info, True, (255, 255, 255))
-            okno.blit(info, (skore[0] - 15, skore[1] + 30))
+            okno.blit(info, (skore_cords[0] - 15, skore_cords[1] + 30))
             if round(time.time() - timeout, 2) > 0.3: #Opět odezva
-                pygame.draw.rect(okno, (0, 255, 255), (skore[0], skore[1], velikost_blocku, velikost_blocku))
-                if pozice_hada[0] == skore: #kontrola kolize hlavy hada s blockem exitu, který je na stejné pozici jako block pro vstup do menu samotného
+                skore.vykresli()
+                if skore.kolize(pozice_hada): #kontrola kolize hlavy hada s blockem exitu, který je na stejné pozici jako block pro vstup do menu samotného
                     zobraz_skore = False
                     timeout = time.time()
-                if pozice_hada[0] == reset: #Vynulování hodnot skóre
+                if reset.kolize(pozice_hada): #Vynulování hodnot skóre
                     with open(f"{soubor_skóre}", "w", encoding="utf-8") as file: 
                         file.write("1;0\n2;0\n3;0")
             #Získávání hodnot skóre

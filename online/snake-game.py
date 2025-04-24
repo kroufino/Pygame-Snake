@@ -2,10 +2,7 @@ import pygame
 from pygame.locals import *
 from packages import okno_volby
 from packages import funkce
-import random
 import time
-import platform
-import os
 import mysql.connector
 import getpass
 #Získání uživatelského jména pro srozumitelnější ukládání hodnot skóre jednotlivých uživatelů
@@ -92,7 +89,6 @@ bg = (0, 0, 0)
 body_inner = (255, 255, 255)
 outline = (100, 100, 200)
 modra = (0, 0, 255)
-barva_jidla = (200, 50, 50)
 #Volba obtížnosti
 obtiznost, pozice_hada, směr = okno_volby.choice(šířka_okna,výška_okna,velikost_blocku,okno,bg,font,font_mensi,fps,outline,modra,body_inner,obtiznosti,mycursor,mydb,user,sloupce,host,username,password,database)
 #Zahájení odpočtu času
@@ -120,10 +116,10 @@ while run:
     #tvorba jídla
     if nove_jidlo == True:
         nove_jidlo = False
-        jidlo = funkce.vytvoření_jídla(obtiznost,obtiznosti,velikost_blocku,šířka_okna,výška_okna,jidlo)
-    pygame.draw.rect(okno, barva_jidla, (jidlo[0], jidlo[1], velikost_blocku, velikost_blocku))
+        jidlo = funkce.vytvoření_jídla(obtiznost,obtiznosti,velikost_blocku,šířka_okna,výška_okna,jidlo,okno)
+    jidlo.vykresli()
     #Kolize s jídlem
-    if pozice_hada[0] == jidlo:#[0] je block hlavy hada a jeho pozice, neboli (1, 20) třeba. Pokud se rovná s pozicí jídla, tak se podmínka vykoná
+    if jidlo.kolize(pozice_hada):
         nove_jidlo = True
         #Prodloužení hada
         prodlouzeny_block = list(pozice_hada[-1])
