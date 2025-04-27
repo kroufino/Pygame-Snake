@@ -80,11 +80,13 @@ python snake-game.py
 ├── .gitignore         
 ├── online/            #Verze hry umožňující ukládání skóre do databáze a zobrazování nejlepších hráčů
 │   ├── packages/
+│   │   └── block.py
 │   │   └── okno_volby.py
 │   │   └── funkce.py
 │   └── snake-game.py
 ├── offline/           #Verze hry umožňující ukládání skóre do lokálního souboru
 │   ├── packages/
+│   │   └── block.py
 │   │   └── okno_volby.py
 │   │   └── funkce.py
 │   └── snake-game.py
