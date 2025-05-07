@@ -5,6 +5,10 @@
 * Hra obsahuje možnost zvolení obtížnosti(více k obtížnostem níže), obsahuje možnost nápovědy, zobrazení a vynulování hodnot skóre dosažených uživatelem 
 * Hra je ve dvou variantách. [První](https://github.com/kroufino/Pygame-Snake/tree/prod/offline) nabízí ukládání skóre do souboru na aktuálně používaném počítači, [druhá](https://github.com/kroufino/Pygame-Snake/tree/prod/online) nabízí ukládání skóre do databáze
 * Online varianta, která ukládá výsledky skóre do Vámi zvolené databáze nabízí možnost zobrazit nejlepšího hráče pro jednotlivou obtížnost!
+* U online varianty jste při prvním spuštění dotázáni na svůj nickname. Program se dotazuje jednou, a "session" ukládá do TEMP path, proto je možné, že se po restartu pc bude dotazovat znovu (toto se týká spíše Linuxu).
+
+> ℹ️ **Info:**
+> U volby nickname byl brán zřetel na možné `SQLi`, vůči kterým by měl být program imunní
 
 > ⚠️ **Pozor:**
 > Program může obsahovat chyby, pokud nějaké naleznete, prosím kontaktujte mě.
@@ -58,13 +62,24 @@ python snake-game.py
     <img src="https://github.com/kroufino/PyGame-Snake/blob/prod/img/4.png" width="30%" height="40%">
 </div>
 
+
 ---
+
 
 ## Žebříčky (Dostupné pouze u online varianty)
 
 <div style="display: flex; gap: 10px;">
     <img src="https://github.com/kroufino/PyGame-Snake/blob/prod/img/6.png" width="30%" height="40%">
     <img src="https://github.com/kroufino/PyGame-Snake/blob/prod/img/5.png" width="30%" height="40%">
+</div>
+
+---
+
+## Volba nickname (Dostupné pouze u online varianty)
+
+<div style="display: flex; gap: 10px;">
+    <img src="https://github.com/kroufino/PyGame-Snake/blob/prod/img/7.png" width="30%" height="40%">
+    <img src="https://github.com/kroufino/PyGame-Snake/blob/prod/img/8.png" width="30%" height="40%">
 </div>
 
 
@@ -81,6 +96,7 @@ python snake-game.py
 ├── online/            #Verze hry umožňující ukládání skóre do databáze a zobrazování nejlepších hráčů
 │   ├── packages/
 │   │   └── block.py
+│   │   └── nickname.py
 │   │   └── okno_volby.py
 │   │   └── funkce.py
 │   └── snake-game.py
@@ -96,7 +112,9 @@ python snake-game.py
 │   ├── 3.jpg
 │   ├── 4.jpg
 │   ├── 5.jpg
-│   └── 6.jpg
+│   ├── 6.jpg
+│   ├── 7.jpg
+│   └── 8.jpg
 └── README.md
 ```
 

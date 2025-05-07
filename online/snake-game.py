@@ -1,12 +1,23 @@
 import pygame
 from pygame.locals import *
-from packages import okno_volby
-from packages import funkce
-import time
+from packages import funkce, okno_volby, nickname
 import mysql.connector
 import getpass
+import os
+import sys
+import platform
+import time
+#Povolené znaky pro prevenci sqli
+povolené_znaky = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", " "]
 #Získání uživatelského jména pro srozumitelnější ukládání hodnot skóre jednotlivých uživatelů
 user = getpass.getuser()
+#Nastavení cesty, kam se bude ukládat soubor s nickname, aby uživatel musel zadat uživatelské jméno pouze jednou
+platform_system = platform.system()
+if platform_system == "Windows":
+    temp_Windows_path = os.environ.get('TEMP')
+    soubor_nick = f"{temp_Windows_path}/supers3cretname.txt"
+else:
+    soubor_nick = "/tmp/supers3cretname.txt"
 #Hodnoty pro napojení se na databázi
 host = "<uri>"
 username = "<username>"
@@ -20,33 +31,6 @@ mydb = mysql.connector.connect(
     ,database = database
 )
 mycursor = mydb.cursor()
-#Kontrola Existence Table Score
-nove_hodnoty = False
-try:
-    mycursor.execute(f"""SELECT * FROM `Score`""")
-    myresult = mycursor.fetchall() 
-except mysql.connector.errors.ProgrammingError: 
-    mycursor.execute("""CREATE TABLE `Score`(
-        username text,
-        Easy int,
-        Medium int,
-        Hard int
-    )""")
-    mydb.commit()
-#Kontrola Existence Hodnot pro aktuálního uživatele
-try:
-    mycursor.execute(f"""SELECT * FROM `Score` WHERE username = '{user}'""")
-    myresult = mycursor.fetchall()
-    if myresult == []:
-        nove_hodnoty = True
-except mysql.connector.errors.ProgrammingError: 
-    nove_hodnoty = True
-if nove_hodnoty == True:#Vytvoření nových hodnot
-    mycursor.execute(f"""INSERT INTO `Score`
-(username, Easy, Medium, Hard) VALUES
-('{user}', 0, 0, 0);
-""")
-    mydb.commit()
 #inicializace
 pygame.init()
 #Okno
@@ -58,6 +42,7 @@ pygame.display.set_caption("Had")
 sloupce = ["Easy", "Medium", "Hard"]#Názvy sloupců, které se nacházející se v databázi pod těmito názvy reprezentující obtížnosti  
 kliknuto = False
 fps = 10
+novy_nick = False
 run = True
 prohra = 0
 stisk = 0
@@ -89,6 +74,52 @@ bg = (0, 0, 0)
 body_inner = (255, 255, 255)
 outline = (100, 100, 200)
 modra = (0, 0, 255)
+#Kontrola, jestli uživatel již jednou nezvolil nickname
+try:
+    with open(soubor_nick, "r", encoding="utf-8") as file:
+        radky = file.readlines()
+        znaky = list(radky[0].strip())
+        for znak in znaky:
+            if znak not in povolené_znaky:
+                novy_nick = True
+        if novy_nick == False:
+            user = radky[0]
+
+except:
+    novy_nick = True
+if novy_nick:
+    #Volba nickname
+    user = nickname.otazka(user,okno,šířka_okna,výška_okna,font_mensi,povolené_znaky)
+    with open(soubor_nick, "w", encoding="utf-8") as file:
+        file.write(f"{user}")
+
+#Kontrola Existence Table Score
+nove_hodnoty = False
+try:
+    mycursor.execute(f"""SELECT * FROM `Score`""")
+    myresult = mycursor.fetchall() 
+except mysql.connector.errors.ProgrammingError: 
+    mycursor.execute("""CREATE TABLE `Score`(
+        username text,
+        Easy int,
+        Medium int,
+        Hard int
+    )""")
+    mydb.commit()
+#Kontrola Existence Hodnot pro aktuálního uživatele
+try:
+    mycursor.execute(f"""SELECT * FROM `Score` WHERE username = '{user}'""")
+    myresult = mycursor.fetchall()
+    if myresult == []:
+        nove_hodnoty = True
+except mysql.connector.errors.ProgrammingError: 
+    nove_hodnoty = True
+if nove_hodnoty == True:#Vytvoření nových hodnot
+    mycursor.execute(f"""INSERT INTO `Score`
+(username, Easy, Medium, Hard) VALUES
+('{user}', 0, 0, 0);
+""")
+    mydb.commit()
 #Volba obtížnosti
 obtiznost, pozice_hada, směr = okno_volby.choice(šířka_okna,výška_okna,velikost_blocku,okno,bg,font,font_mensi,fps,outline,modra,body_inner,obtiznosti,mycursor,mydb,user,sloupce,host,username,password,database)
 #Zahájení odpočtu času

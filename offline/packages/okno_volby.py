@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 from packages import funkce,block
 import time
+import sys
 
 def choice(šířka_okna,výška_okna,velikost_blocku,okno,bg,font,font_mensi,fps,outline,modra,body_inner,soubor_skóre,obtiznosti):
     easy_cords = [šířka_okna // 5, výška_okna // 3] #Souřadnice blocku reprezentující Easy obtížnost
@@ -40,7 +41,7 @@ def choice(šířka_okna,výška_okna,velikost_blocku,okno,bg,font,font_mensi,fp
         #Kontrola událostí provedených uživatelem
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
+                sys.exit()
             elif event.type == pygame.KEYDOWN and stisk == 0 and neměnit_směr == False:
                 if event.key == pygame.K_w and směr != 3:#Pokud stiskneme W a proměnná směr není 3, což by znamenalo že had se pohybuje směrem dolu, tak se změní proměnná směr na 1, což znamená, že pojede nahoru
                     směr = 1

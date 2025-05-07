@@ -5,6 +5,7 @@ from packages import funkce
 import time
 import platform
 import os
+import sys
 #Nastavení cesty, kam se bude ukládat soubor s nejvyšším skórem
 platform_system = platform.system()
 if platform_system == "Windows":
@@ -67,7 +68,7 @@ while run:
     #Kontrola událostí provedených uživatelem
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            run = False
+            sys.exit()
         elif event.type == pygame.KEYDOWN and stisk == 0:
             if event.key == pygame.K_w and směr != 3:#Pokud stiskneme W a proměnná směr není 3, což by znamenalo že had se pohybuje směrem dolu, tak se změní proměnná směr na 1, což znamená, že pojede nahoru
                 směr = 1
