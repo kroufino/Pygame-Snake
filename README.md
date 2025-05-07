@@ -45,7 +45,7 @@ password = "<Vaše_heslo>"
 database = "<název_databáze>"
 ```
 
-4. Spusť hru:
+4. Spusťte hru:
 
 ```bash
 python snake-game.py
