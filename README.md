@@ -30,18 +30,18 @@
 ## ▶️ Jak spustit
 
 1. Bude potřeba Python 3.8+.
-2. Nainstaluj knihovny:
+2. Nainstalujte knihovny:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. (pouze u `online` varianty) Nakonfiguruj připojení k MySQL v souboru `snake-game.py`:
+3. (pouze u `online` varianty) Nakonfigurujte připojení k MySQL v souboru `snake-game.py`:
 
 ```python
-host = "<tvůj_host>"
-username = "<tvé_uživatelské_jméno>"
-password = "<tvoje_heslo>"
+host = "<Váš_host>"
+username = "<Vaše_uživatelské_jméno>"
+password = "<Vaše_heslo>"
 database = "<název_databáze>"
 ```
 
